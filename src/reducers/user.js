@@ -3,7 +3,7 @@ import * as UserActionTypes from '../actiontypes/user';
 const initialState = {  
     user: null,
     login: false,
-    successful: false,
+    isAuthenticated: false,
     number: 0
   }
 
@@ -12,13 +12,13 @@ export default function User(state=initialState, action) {
         case UserActionTypes.LOGIN_REQUESTING:
             return { ...state, login: true };
         case UserActionTypes.LOGIN:
-            console.log(action);
-            return { ...state, user: action.username, successful: true };
+            var username = action.response.data().username
+            return { ...state, user: username, isAuthenticated: true };
         case UserActionTypes.LOGOUT:
             return {
                 user: null,
                 login: false,
-                successful: false,
+                isAuthenticated: false,
                 number: 0
             };
         case UserActionTypes.UPDATE_INCREMENT:

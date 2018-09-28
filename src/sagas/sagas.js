@@ -37,34 +37,29 @@ function checkAuthentication(user) {
     console.log(user)
     let userToCheck = db.collection("users").doc(user.username);
     return userToCheck.get()
-    // .then((doc) => {
-    //     if (doc.exists) {
-    //         var username = doc.data().username;
-    //         console.log(username + " dc ko day")
-    //         console.log("Document data:", doc.data());
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //     }
-    // })
 }
 
 function* loginWatcher() {
-    yield takeLatest(UserActionTypes.LOGIN, loginWorker);
+    yield takeLatest(UserActionTypes.LOGIN_REQUESTING, loginWorker);
 }
 
 function* loginWorker(user) {
+    console.log("dafug")
     try {
         var response = yield call(checkAuthentication, user);
         if (response.data().username != null) {
-            console.log(response.data().username)
-            yield put({ type: UserActionTypes.LOGIN })
-            sessionStorage.setItem('user', response.data().username);
+            console.log(response.data().username + "dc day")
+            sessionStorage.setItem("user", response.data().username)
+            yield put({ type: UserActionTypes.LOGIN , response})
         } else{
+            console.log('dieu vl 1')
             yield put({ type: UserActionTypes.LOGOUT })
+            sessionStorage.clear('user');
         }
     } catch (error) {
+        console.log('dieu vl 2')
         yield put({ type: UserActionTypes.LOGOUT })
+        sessionStorage.clear('user');
     }
 }
 

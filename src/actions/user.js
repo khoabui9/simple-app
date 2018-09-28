@@ -1,10 +1,18 @@
 import * as UserActionTypes from '../actiontypes/user';
 
-export const login = (username, password) => {
+
+export const loginRequesting = (username, password) => {
     return {
-        type: UserActionTypes.LOGIN,
+        type: UserActionTypes.LOGIN_REQUESTING,
         username: username,
         password: password
+    };
+};
+
+export const login = (isAuth) => {
+    return {
+        type: UserActionTypes.LOGIN,
+        isAuth
     };
 };
 

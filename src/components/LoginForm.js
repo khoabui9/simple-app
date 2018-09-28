@@ -36,19 +36,19 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div className="App center">
-        <form>
-            <div>
-                <label htmlFor="username" className="label">Username</label>
-                <input type="text" id="username" className="input" value={this.state.username} onChange={this.onUsernameChange} required/>
-            </div>
-            <div className="field">
-                <label htmlFor="password" className="label">Password</label>
-                <input type="password" id="password" className="input" value={this.state.password} onChange={this.onPasswordChange} required/>
-            </div>
-            <div className="form_footer">
-                <button className="btn" onClick={this.onSubmit}>Login</button>
-            </div>
+      <div className="App full center">
+        <form className="login-form">
+          <label htmlFor="username" className="label custom-font">Username</label>
+          <div>
+            <input type="text" id="username" className="form-input" value={this.state.username} onChange={this.onUsernameChange} required />
+          </div>
+          <label htmlFor="password" className="label custom-font">Password</label>
+          <div className="field">
+            <input type="password" id="password" className="form-input" value={this.state.password} onChange={this.onPasswordChange} required />
+          </div>
+          <div className="form_footer">
+            <button className="btn custom-font" onClick={this.onSubmit}>Login</button>
+          </div>
         </form>
       </div>
     );
