@@ -17,6 +17,9 @@ class Main extends Component {
             <Counter
               username={user}
               number={number}
+              onIncrement = {this.props.onIncrement}
+              onDecrement = {this.props.onDecrement}
+              onLogout = {this.props.onLogout}
             />
           )}
       </div>
@@ -34,7 +37,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRequestLogin: (user, password) => dispatch(UserAction.loginRequesting(user, password))
+    onRequestLogin: (user, password) => dispatch(UserAction.loginRequesting(user, password)),
+    onIncrement: (number) => dispatch(UserAction.updateIncrement(number)),
+    onDecrement: (number) => dispatch(UserAction.updateDecrement(number)),
+    onLogout: () => dispatch(UserAction.logoutRequesting())
   };
 };
 

@@ -6,12 +6,10 @@ class Header extends Component {
     return (
       <div className="header-container">
         <p className="user-title">{this.props.username}</p>
-        <p className="logout">logout</p>
+        <p className="logout" onClick={this.props.onLogout}>logout</p>
       </div>
     );
   }
 }
-
-
 
 export default Header;

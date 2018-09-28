@@ -64,7 +64,7 @@ html {
   line-height: 40px;
   font-size: 200px;
   text-transform: uppercase;
-  color: #08634c;
+  color: #004936;
   font-weight: lighter;
 }
 
@@ -98,6 +98,15 @@ html {
   text-transform: uppercase;
   color: grey;
   font-weight: lighter;
+  cursor: pointer;
+}
+
+.minus-btn:hover, .plus-btn:hover {
+  color: #08634c;
+}
+
+.logout {
+  cursor: pointer;
 }
 
 

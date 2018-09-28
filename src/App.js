@@ -6,26 +6,11 @@ import routes from './routes';
 import './App.css';
 
 class App extends Component {
-  // checkAuth() {
-  //   var isAuth = this.props.isAuthenticated;
-  //   if (isAuth) {
-  //     <Redirect to='/'/>;
-  //   } else {
-  //     <Redirect to='/counter'/>;
-  //   }
-  // }
-
   render() {
     return (
       <Router>{routes}</Router>
     );
   }
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     isAuthenticated: state.isAuthenticated
-//   };
-// };
 
 export default App;

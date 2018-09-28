@@ -7,16 +7,16 @@ class Counter extends Component {
     return (
       <div className="App full">
         <header className="app-header full">
-          <Header username={this.props.username} />
+          <Header username={this.props.username} onLogout={this.props.onLogout}/>
           <div className="full center">
             <div className="minus center">
-              <p className="minus-btn">-</p>
+              <p className="minus-btn" onClick={() => this.props.onDecrement(1)}>-</p>
             </div>
             <div className="number center">
               <p className="app-number">{this.props.number}</p>
             </div>
             <div className="plus center">
-              <p className="plus-btn">+</p>
+              <p className="plus-btn" onClick={() => this.props.onIncrement(1)}>+</p>
             </div>
           </div>
         </header>

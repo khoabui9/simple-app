@@ -9,22 +9,41 @@ export const loginRequesting = (username, password) => {
     };
 };
 
-export const login = (isAuth) => {
+// export const login = () => {
+//     return {
+//         type: UserActionTypes.LOGIN,
+//     };
+// };
+
+export const logoutRequesting = () => {
     return {
-        type: UserActionTypes.LOGIN,
-        isAuth
+        type: UserActionTypes.LOGOUT_REQUESTING,
     };
 };
 
-export const logout = () => {
-    return {
-        type: UserActionTypes.LOGOUT,
-    };
-};
-
-export const updateIncrement = (num) => {
+export const updateIncrement = (number) => {
     return {
         type: UserActionTypes.UPDATE_INCREMENT,
-        number: num
+        number
     };
 };
+
+export const updateDecrement = (number) => {
+    return {
+        type: UserActionTypes.UPDATE_DECREMENT,
+        number
+    };
+};
+
+// export const increment = (number) => {
+//     return {
+//         type: UserActionTypes.INCREMENT,
+//     };
+// };
+
+
+// export const decrement = (number) => {
+//     return {
+//         type: UserActionTypes.INCREMENT,
+//     };
+// };

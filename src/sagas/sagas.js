@@ -34,7 +34,6 @@ db.collection("users").doc("admin").set({
 
 
 function checkAuthentication(user) {
-    console.log(user)
     let userToCheck = db.collection("users").doc(user.username);
     return userToCheck.get()
 }
@@ -44,27 +43,52 @@ function* loginWatcher() {
 }
 
 function* loginWorker(user) {
-    console.log("dafug")
     try {
         var response = yield call(checkAuthentication, user);
         if (response.data().username != null) {
-            console.log(response.data().username + "dc day")
             sessionStorage.setItem("user", response.data().username)
             yield put({ type: UserActionTypes.LOGIN , response})
         } else{
-            console.log('dieu vl 1')
             yield put({ type: UserActionTypes.LOGOUT })
             sessionStorage.clear('user');
         }
     } catch (error) {
-        console.log('dieu vl 2')
         yield put({ type: UserActionTypes.LOGOUT })
         sessionStorage.clear('user');
     }
 }
 
+function* logoutWatcher() {
+    yield takeLatest(UserActionTypes.LOGOUT_REQUESTING, logoutWorker);
+}
+
+function* logoutWorker() {
+    yield put({ type: UserActionTypes.LOGOUT })
+    sessionStorage.clear('user');
+}
+
+function* incrementWatcher() {
+    yield takeLatest(UserActionTypes.UPDATE_INCREMENT, incrementWorker);
+}
+
+function* incrementWorker() {
+    yield put({ type: UserActionTypes.INCREMENT })
+}
+
+function* decrementWatcher() {
+    yield takeLatest(UserActionTypes.UPDATE_DECREMENT, decrementWorker);
+}
+
+function* decrementWorker() {
+    yield put({ type: UserActionTypes.DECREMENT })
+}
+
+
 export default function* rootSaga() {
     yield all([
-        loginWatcher()
+        loginWatcher(),
+        incrementWatcher(),
+        decrementWatcher(),
+        logoutWatcher()
       ])
  }
