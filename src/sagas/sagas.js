@@ -4,6 +4,7 @@ import {put,take,call, all,takeLatest, fork,takeEvery} from 'redux-saga/effects'
 import {eventChannel} from 'redux-saga';
 import {browserHistory} from 'react-router';
 import * as UserActionTypes from '../actiontypes/user';
+import { push } from 'react-router-redux';
 
 //firestore config
 const config = {
@@ -53,6 +54,7 @@ function* loginWorker(action) {
         var response = yield call(checkAuthentication, action.payload);
 
         if (response.data().username != null) { 
+            console.log("alo")
             sessionStorage.setItem("user", response.data().username)
             yield put({ type: UserActionTypes.LOGIN , response})
         } else{

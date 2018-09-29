@@ -1,5 +1,6 @@
 *, *:after, *:before {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body,
@@ -21,9 +22,15 @@ html {
 }
 
 .center {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .form-input {
@@ -35,7 +42,6 @@ html {
   line-height: 20px;
   font-size: 20px;
   border-bottom: solid 1px #b3b2ca;
-  transition: all .23s ease-in;
   margin-bottom: 20px;
 }
 
@@ -71,8 +77,12 @@ html {
 }
 
 .header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 20px;
@@ -106,5 +116,4 @@ html {
 .logout {
   cursor: pointer;
 }
-
 

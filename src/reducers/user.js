@@ -5,6 +5,7 @@ const initialState = {
     login: false,
     isAuthenticated: false,
     number: 0,
+    logout: true
 }
 
 /**
@@ -24,6 +25,7 @@ export default function User(state = initialState, action) {
             var username = action.response.data().username
             return { ...state,
                 user: username,
+                number: 0,
                 isAuthenticated: true
             };
         case UserActionTypes.LOGOUT_REQUESTING:
@@ -33,7 +35,7 @@ export default function User(state = initialState, action) {
                 user: null,
                 login: false,
                 isAuthenticated: false,
-                number: 0
+                number: null,
             };
         case UserActionTypes.UPDATE_INCREMENT:
             return { ...state,

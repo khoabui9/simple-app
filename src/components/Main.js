@@ -4,26 +4,32 @@ import Counter from './Counter'
 import '../App.css';
 import { connect } from 'react-redux';
 import * as UserAction from '../actions/user';
-
+import {Redirect} from "react-router-dom"
 
 class Main extends Component {
   render() {
     const { user, number, isAuthenticated } = this.props;
-    return (
-      <div className="full">
-        {!isAuthenticated ? (
+    var userCheck = sessionStorage.getItem("user")
+    if (!userCheck)
+      return (
+        /**single page */
+
+          // {/* {!isAuthenticated ? (
+          //   <LoginForm onRequestLogin={this.props.onRequestLogin} />
+          // ) : (
+          //     <Counter
+          //       username={user}
+          //       number={number}
+          //       onIncrement = {this.props.onIncrement}
+          //       onDecrement = {this.props.onDecrement}
+          //       onLogout = {this.props.onLogout}
+          //     />
+          //   )} */}
+
           <LoginForm onRequestLogin={this.props.onRequestLogin} />
-        ) : (
-            <Counter
-              username={user}
-              number={number}
-              onIncrement = {this.props.onIncrement}
-              onDecrement = {this.props.onDecrement}
-              onLogout = {this.props.onLogout}
-            />
-          )}
-      </div>
-    );
+      );
+    else 
+      return <Redirect to="/counter"/>
   }
 }
 
@@ -38,9 +44,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onRequestLogin: (user, password) => dispatch(UserAction.loginRequesting(user, password)),
-    onIncrement: (number) => dispatch(UserAction.updateIncrement(number)),
-    onDecrement: (number) => dispatch(UserAction.updateDecrement(number)),
-    onLogout: () => dispatch(UserAction.logoutRequesting())
+    // onIncrement: (number) => dispatch(UserAction.updateIncrement(number)),
+    // onDecrement: (number) => dispatch(UserAction.updateDecrement(number)),
+    // onLogout: () => dispatch(UserAction.logoutRequesting())
   };
 };
 
