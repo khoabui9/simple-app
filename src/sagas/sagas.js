@@ -5,6 +5,7 @@ import {eventChannel} from 'redux-saga';
 import {browserHistory} from 'react-router';
 import * as UserActionTypes from '../actiontypes/user';
 
+//firestore config
 const config = {
     apiKey: "AIzaSyBlrYl7suPhBaAD2VMx9Yf90ezy9DPxSgU",
     authDomain: "agency-leroy-app.firebaseapp.com",
@@ -16,11 +17,11 @@ firebase.initializeApp(config);
 // Initialize Cloud Firestore through Firebase
 var db = firebase.firestore();
 
-// Disable deprecated features
 db.settings({
     timestampsInSnapshots: true
 });
 
+// add initial data to db
 db.collection("users").doc("admin").set({
         username: "admin",
         password: "123"
@@ -32,20 +33,26 @@ db.collection("users").doc("admin").set({
         console.error("Error writing document: ", error);
     });
 
-
+// check if user is in db
 function checkAuthentication(user) {
-    let userToCheck = db.collection("users").doc(user.username);
+    let userToCheck = db.collection("users").doc(user);
     return userToCheck.get()
 }
 
-function* loginWatcher() {
+/**
+ * saga watcher that is triggered when dispatching action of type
+ * 'LOGIN_REQUESTING'
+ */
+export function* loginWatcher() {
     yield takeLatest(UserActionTypes.LOGIN_REQUESTING, loginWorker);
 }
 
-function* loginWorker(user) {
+/** saga worker that is responsible for the side effects */
+function* loginWorker(action) {
     try {
-        var response = yield call(checkAuthentication, user);
-        if (response.data().username != null) {
+        var response = yield call(checkAuthentication, action.payload);
+
+        if (response.data().username != null) { 
             sessionStorage.setItem("user", response.data().username)
             yield put({ type: UserActionTypes.LOGIN , response})
         } else{
@@ -58,7 +65,11 @@ function* loginWorker(user) {
     }
 }
 
-function* logoutWatcher() {
+/**
+ * saga watcher that is triggered when dispatching action of type
+ * 'LOGOUT_REQUESTING'
+ */
+export function* logoutWatcher() {
     yield takeLatest(UserActionTypes.LOGOUT_REQUESTING, logoutWorker);
 }
 
@@ -67,7 +78,11 @@ function* logoutWorker() {
     sessionStorage.clear('user');
 }
 
-function* incrementWatcher() {
+/**
+ * saga watcher that is triggered when dispatching action of type
+ * 'UPDATE_INCREMENT'
+ */
+export function* incrementWatcher() {
     yield takeLatest(UserActionTypes.UPDATE_INCREMENT, incrementWorker);
 }
 
@@ -75,20 +90,14 @@ function* incrementWorker() {
     yield put({ type: UserActionTypes.INCREMENT })
 }
 
-function* decrementWatcher() {
+/**
+ * saga watcher that is triggered when dispatching action of type
+ * 'UPDATE_DECREMENT'
+ */
+export function* decrementWatcher() {
     yield takeLatest(UserActionTypes.UPDATE_DECREMENT, decrementWorker);
 }
 
 function* decrementWorker() {
     yield put({ type: UserActionTypes.DECREMENT })
 }
-
-
-export default function* rootSaga() {
-    yield all([
-        loginWatcher(),
-        incrementWatcher(),
-        decrementWatcher(),
-        logoutWatcher()
-      ])
- }

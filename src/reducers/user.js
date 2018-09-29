@@ -7,6 +7,13 @@ const initialState = {
     number: 0,
 }
 
+/**
+ * 
+ * @param {*} state 
+ * @param {*} action 
+ * 
+ * user reducers
+ */
 export default function User(state = initialState, action) {
     switch (action.type) {
         case UserActionTypes.LOGIN_REQUESTING:

@@ -1,11 +1,10 @@
 import * as UserActionTypes from '../actiontypes/user';
 
 
-export const loginRequesting = (username, password) => {
+export const loginRequesting = (param) => {
     return {
         type: UserActionTypes.LOGIN_REQUESTING,
-        username: username,
-        password: password
+        payload: param
     };
 };
 
