@@ -72,10 +72,6 @@ html {
   font-weight: lighter;
 }
 
-.app-header {
-  position: absolute;
-}
-
 .header-container {
   display: -webkit-box;
   display: -ms-flexbox;
