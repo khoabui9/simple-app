@@ -8,9 +8,9 @@ import { push } from 'react-router-redux';
 
 //firestore config
 const config = {
-    apiKey: "AIzaSyBlrYl7suPhBaAD2VMx9Yf90ezy9DPxSgU",
-    authDomain: "agency-leroy-app.firebaseapp.com",
-    projectId: "agency-leroy-app",
+    apiKey: '### FIREBASE API KEY ###',
+    authDomain: '### FIREBASE AUTH DOMAIN ###',
+    projectId: '### CLOUD FIRESTORE PROJECT ID ###'
 };
 
 firebase.initializeApp(config);
